@@ -7,9 +7,9 @@ module.exports = function split (matcher, mapper, reverse) {
   if (!matcher)
     matcher = '\n'
 
-  return through(function (buffer) { 
+  return through(function (buffer) {
     var stream = this
-      , pieces = ( reverse 
+      , pieces = ( reverse
         ? buffer + soFar
         : soFar + buffer
       ).split(matcher)
@@ -30,9 +30,8 @@ module.exports = function split (matcher, mapper, reverse) {
   },
   function () {
     if(soFar != null)
-      this.queue(soFar)  
+      this.queue(soFar)
     this.queue(null)
   })
-
 }
 
