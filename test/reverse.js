@@ -18,7 +18,6 @@ test('read this file', function (t) {
         i -= block
         _i = Math.max(_i, 0)
         var line = file.substring(_i - block, _i)
-        console.log([line])
         cb(null, line)
       }
     }
