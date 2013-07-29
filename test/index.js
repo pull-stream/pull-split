@@ -22,7 +22,6 @@ test('read this file', function (t) {
   })()
   .pipe(split())
   .pipe(pull.writeArray(function (err, array){
-    console.log(array)
     t.equal(array.length, lines.length)
     t.deepEqual(array, lines)
     t.end()
