@@ -9,8 +9,8 @@ test('read this file', function (t) {
   var lines = file.split('\n').reverse()
   var i = file.length, block = 300
 
-  pull.pipeableSource(function () {
-    return function (end, cb) {
+  pull(
+    function (end, cb) {
       if (i <= 0)
         cb(true)
       else {
@@ -20,14 +20,16 @@ test('read this file', function (t) {
         var line = file.substring(_i - block, _i)
         cb(null, line)
       }
-    }
-  })()
-  .pipe(split('\n', null, true))
-  .pipe(pull.writeArray(function (err, array){
-    t.equal(array.length, lines.length)
-    t.deepEqual(array, lines)
-    t.end()
-  }))
+    },
+    split('\n', null, true),
+    pull.collect(function (err, array){
+      t.equal(array.length, lines.length)
+      t.deepEqual(array, lines)
+      t.end()
+    })
+  )
 })
 
 //haoeunhoeu
+
+
