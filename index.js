@@ -1,3 +1,4 @@
+'use strict'
 var through = require('pull-through')
 
 module.exports = function split (matcher, mapper, reverse, last) {
@@ -33,13 +34,8 @@ module.exports = function split (matcher, mapper, reverse, last) {
   function () {
     if(last && soFar == '')
       return this.queue(null)
-    else (soFar != null) // && (last && soFar != ''))
-      map(this, soFar)
 
+    map(this, soFar)
     this.queue(null)
   })
 }
-
-
-
-
